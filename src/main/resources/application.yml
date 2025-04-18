@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://192.168.0.126/botbuilder
+    username: botuser
+    password: botpass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    open-in-view: false
+logging:
+  file.name: ./log/bot-builder.log
+  level:
+    org.springframework.web: INFO
+    org.hibernate.SQL: INFO
+    org.hibernate.type: INFO
+    org.springframework.security: INFO
+    org.springframework.web.HttpLogging: INFO
+    com.zaxxer.hikari.HikariConfig: INFO
+    org.springframework.web.reactive.function.client.ExchangeFunctions: INFO
+    org.springframework.web.servlet.DispatcherServlet: INFO
