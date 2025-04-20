@@ -20,3 +20,10 @@ logging:
     com.zaxxer.hikari.HikariConfig: INFO
     org.springframework.web.reactive.function.client.ExchangeFunctions: INFO
     org.springframework.web.servlet.DispatcherServlet: INFO
+bots:
+  testbot:
+     username: my_test_builder_bot
+     token: 8176452782:AAF2x4x9X6540wsosYeR6yQwwsCCewW2_5c
+  angeimebel:
+     username: angeimebel_bot
+     token: 7720206806:AAGEidLmH6d4zf2s0-iI_rOs8IP71gR3I0A
