@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class BotProperties {
     private String username;
     private String token;
+    private boolean enabled;
 }

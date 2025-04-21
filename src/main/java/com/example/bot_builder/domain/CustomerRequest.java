@@ -1,5 +1,6 @@
 package com.example.bot_builder.domain;
 
+import com.example.bot_builder.enums.BotKind;
 import jakarta.persistence.*;
 
 @Entity
@@ -25,6 +26,10 @@ public class CustomerRequest {
 
     @Column(name = "processed")
     private boolean processed;
+
+    @Enumerated
+    @Column(name = "bot_kind")
+    private BotKind botKind;
 
     public CustomerRequest() {
     }
@@ -75,5 +80,13 @@ public class CustomerRequest {
 
     public void setProcessed(boolean processed) {
         this.processed = processed;
+    }
+
+    public BotKind getBotKind() {
+        return botKind;
+    }
+
+    public void setBotKind(BotKind botKind) {
+        this.botKind = botKind;
     }
 }

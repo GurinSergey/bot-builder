@@ -3,6 +3,7 @@ package com.example.bot_builder.component;
 import com.example.bot_builder.domain.CustomerRequest;
 import com.example.bot_builder.domain.TelegramUser;
 import com.example.bot_builder.domain.model.mapper.TelegramUserMapper;
+import com.example.bot_builder.enums.BotKind;
 import com.example.bot_builder.enums.RequestSteps;
 import com.example.bot_builder.exeption.CustomWarningException;
 import com.example.bot_builder.service.CustomerRequestService;
@@ -10,6 +11,7 @@ import com.example.bot_builder.service.TelegramUserService;
 import com.example.bot_builder.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -27,6 +29,7 @@ import java.util.Map;
 import static com.example.bot_builder.enums.RequestSteps.*;
 
 @Component
+@ConditionalOnProperty(name = "bots.testbot.enabled", havingValue = "true")
 public class MyTestTelegramBot extends TelegramLongPollingBot {
     private final CustomerRequestService customerRequestService;
     private final TelegramUserMapper telegramUserMapper;
@@ -168,11 +171,13 @@ public class MyTestTelegramBot extends TelegramLongPollingBot {
                 this.customerRequest.remove(chatId);
 
                 customerRequest.setTelegramUser(telegramUser);
+                customerRequest.setBotKind(BotKind.fromValue(getBotUsername()));
 
                 CustomerRequest save = customerRequestService.save(customerRequest);
 
-                sendMessage(chatId, "Дякуємо. Створено запит #" + save.getId() + ". \n" +
-                        "Ми зв'яжемося з вами найближчим часом!");
+                sendMessage(chatId, "Дякуємо\n" +
+                        "Запит успішно створено. ID: " + save.getId() + "\n" +
+                        "Ми зв'яжемося з вами найближчим часом");
 
                 sendMainMenu(chatId);
             }
